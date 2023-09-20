@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+int integerNumber = 42;
+long longNumber = 1234567890L;
+short shortNumber = 32767;
+unsigned int unsignedInteger = 100;
+unsigned long unsignedLong = 9876543210UL;
+
+printf("Integer: %d\n", integerNumber);
+printf("Long Integer: %ld\n", longNumber);
+printf("Short Integer: %hd\n", shortNumber);
+printf("Unsigned Integer: %u\n", unsignedInteger);
+printf("Unsigned Long Integer: %lu\n", unsignedLong);
+
+printf("Octal Number: %o\n", integerNumber);
+printf("Hexadecimal Number: %x\n", integerNumber);
+printf("Hexadecimal Number (uppercase): %X\n", integerNumber);
+
+return 0;
+}
+
