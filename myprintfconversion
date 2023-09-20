@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdlib.h>
+
+#define BUFFER_SIZE 1024
+
+typedef struct {
+char data[BUFFER_SIZE];
+size_t size;
+} buffer_t;
+
+int my_printf(const char *format, ...);
+unsigned int convert_s(va_list args, buffer_t *output, int prec);
+unsigned int convert_S(va_list args, buffer_t *output, int prec);
+
+int main() {
+my_printf("String: %s\n", "Hello, world!");
+my_printf("String with precision: %.5s\n", "Hello, world!");
+my_printf("Non-printable string: %S\n", "Hello\tworld!");
+
+return 0;
+}
+
+int my_printf(const char *format, ...) {
+va_list args;
+va_start(args, format);
+
+int printed = 0;
+const char *p = format;
+buffer_t output = { .size = 0 };
+
+while (*p) {
+if (*p != '%') {
+putchar(*p);
+p++;
+printed++;
+} else	{
+p++;
+int precision = -1;
+if (*p == '.') {
+p++;
+precision = atoi(p);
+while (*p >= '0' && *p <= '9') {
+p++;
+}
+}
+
+switch (*p) {
+case 's':
+printed += convert_s(args, &output, precision);
+break;
+case 'S':
+printed += convert_S(args, &output, precision);
+break;
+default:
+putchar(*p);
+printed++;
+break;
+}
+p++;
+}
+}
+
+va_end(args);
+return printed;
+}
+
+unsigned int convert_s(va_list args, buffer_t *output, int prec) {
+char *str = va_arg(args, char *);
+if (str == NULL) {
+str = "(null)";
+}
+size_t len = 0;
+while (str[len] != '\0') {
+len++;
+}
+if (prec != -1 && (int)len > prec) {
+len = (size_t)prec;
+}
+for (size_t i = 0; i < len; i++) {
+if (output->size < BUFFER_SIZE - 1) {
+output->data[output->size] = str[i];
+output->size++;
+}
+}
+return len;
+}
+
+unsigned int convert_S(va_list args, buffer_t *output, int prec) {
+char *str = va_arg(args, char *);
+if (str == NULL) {
+str = "(null)";
+}
+size_t len = 0;
+while (str[len] != '\0' && (prec == -1 || (int)len < prec)) {
+if (str[len] < 32 || str[len] >= 127) {
+if (output->size < BUFFER_SIZE - 4) {
+snprintf(output->data + output->size, BUFFER_SIZE - output->size, "\\x%02X", str[len]);
+output->size += 4;
+}
+} else {
+if (output->size < BUFFER_SIZE - 1) {
+output->data[output->size] = str[len];
+output->size++;
+}
+}
+len++;
+}
+return len;
+}
+
