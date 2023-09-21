@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdint.h>
+
+int custom_printf(const char *format, ...);
+int print_binary(uint32_t num);
+
+int main(void) {
+custom_printf("%b\n", 98);
+return 0;
+}
+
+int print_binary(uint32_t num) {
+
+int flag = 0;
+
+int count = 0;
+
+for (int i = 31; i >= 0; i--) {
+uint32_t mask = 1U << i;
+int bit = (num & mask) ? 1 : 0;
+
+if (bit || flag) {
+putchar('0' + bit);
+count++;
+flag = 1;
+}
+    }
+
+if (count == 0) {
+putchar('0');
+count++;
+}
+
+return count;
+}
+
+int custom_printf(const char *format, ...) {
+va_list args;
+va_start(args, format);
+
+int total_chars = 0;
+
+for (const char *p = format; *p != '\0'; p++) {
+if (*p == '%' && *(p + 1) == 'b') {
+uint32_t num = va_arg(args, uint32_t);
+total_chars += print_binary(num);
+p++; // Skip 'b'
+} else {
+putchar(*p);
+total_chars++;
+}
+}
+
+va_end(args);
+
+return total_chars;
+}
+

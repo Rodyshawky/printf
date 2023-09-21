@@ -1,0 +1,87 @@
+#include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
+
+/**
+ * _printf - custom printf function
+ * @format: format specifier
+ * Return: Number of characters printed
+ */
+int _printf(const char *format, ...)
+{
+va_list args;
+int printed_chars = 0;
+
+va_start(args, format);
+printed_chars = _printf_helper(format, args);
+va_end(args);
+
+return (printed_chars);
+}
+
+/**
+ * _print_hex - Print a hexadecimal value with leading zeros if necessary
+ * @n: The number to print
+ */
+void _print_hex(unsigned char n)
+{
+char hex_digits[] = "0123456789ABCDEF";
+putchar('\\');
+putchar('x');
+putchar(hex_digits[n / 16]);
+putchar(hex_digits[n % 16]);
+}
+
+/**
+ * _printf_helper - helper function for _printf
+ * @format: format specifier
+ * @args: variable arguments list
+ * Return: Number of characters printed
+ */
+int _printf_helper(const char *format, va_list args)
+{
+int i = 0, printed_chars = 0;
+
+while (format && format[i])
+{
+if (format[i] != '%')
+{
+putchar(format[i]);
+printed_chars++;
+}
+else
+{
+i++;
+if (format[i] == 'S')
+{
+char *str = va_arg(args, char *);
+if (str)
+{
+while (*str)
+{
+if ((*str >= 0 && *str < 32) || *str >= 127)
+{
+_print_hex(*str);
+printed_chars += 4;
+}
+else
+{
+putchar(*str);
+printed_chars++;
+}
+str++;
+}
+}
+}
+else
+{
+putchar('%');
+putchar(format[i]);
+printed_chars += 2;
+}
+}
+i++;
+}
+return (printed_chars);
+}
+

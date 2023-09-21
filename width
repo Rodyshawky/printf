@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+void printIntWithFieldWidth(int value, int fieldWidth) {
+printf("%*d\n", fieldWidth, value);
+}
+
+void printDoubleWithFieldWidth(double value, int fieldWidth, int precision) {
+printf("%*.*lf\n", fieldWidth, precision, value);
+}
+
+int main() {
+int num1 = 123;
+double num2 = 456.789;
+
+int fieldWidth1 = 8;
+int fieldWidth2 = 12;
+int precision2 = 2;
+    
+// Printing integers and doubles with custom field widths and precision
+printIntWithFieldWidth(num1, fieldWidth1);
+printDoubleWithFieldWidth(num2, fieldWidth2, precision2);
+    
+return 0;
+}
+

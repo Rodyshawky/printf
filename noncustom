@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+// Define variables
+int positiveNumber = 42;
+int negativeNumber = -42;
+
+// Use the "+" flag to display numbers with a positive sign even if they are positive
+printf("Positive number with + flag: %+d\n", positiveNumber);
+printf("Negative number with + flag: %+d\n", negativeNumber);
+
+// Use the " " flag to display positive numbers with a space instead of the "+" sign
+printf("Positive number with space flag: % d\n", positiveNumber);
+printf("Negative number with space flag: % d\n", negativeNumber);
+
+// Use the "#" flag with binary and octal numbers to add "0x" and "0" prefixes to the final representation
+printf("Positive number in hexadecimal with # flag: %#x\n", positiveNumber);
+printf("Negative number in octal with # flag: %#o\n", negativeNumber);
+
+return 0;
+}
+
