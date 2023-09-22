@@ -14,6 +14,7 @@ int main(void)
 	_printf("%c", c);
 	_printf("%%");
 	_printf("%s", s);
+	_printf("Let's print a simple sentence.\n");
 
 	return (0);
 }
