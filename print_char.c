@@ -1,6 +1,15 @@
-#include"main.h"
+#include "main.h"
 
-int print_char(char c)
+/**
+ * printf_char - prints a char.
+ * @val: arguments.
+ * Return: 1.
+ */
+int printf_char(va_list val)
 {
-	return (write(1, &c, 1));
+	char s;
+
+	s = va_arg(val, int);
+	_putchar(s);
+	return (1);
 }
