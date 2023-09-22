@@ -32,23 +32,17 @@ while (*format)
 		if (*format == '\0')
 			break;
 		else if (*format == '%')
-                {
-                        write(1, format, 1);
-                        count++;
-                }
+			write(1, format, 1);
+			count++;
 		else if (*format == 'c')
-		{
 			c = va_arg(arg, int);
 			write(1, &c, 1);
 			count++;
-		}
 		else if (*format == 's')
-		{
 			str = va_arg(arg, char*);
 			len = strlen(str);
 			write(1, str, len);
 			count += len;
-		}
 	}
 		format++;
 }
