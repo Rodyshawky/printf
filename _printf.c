@@ -44,12 +44,6 @@ while (*format)
 			write(1, str, len);
 			count += len;
 		}
-		else
-		{
-			c = va_arg(arg, int);
-                        write(1	, &c, 1);
-                        count++;
-		}
 	}
 		format++;
 }
