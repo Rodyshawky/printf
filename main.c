@@ -19,5 +19,6 @@ int main(void)
 	_printf("%K\n");
 	_printf("%c", '\0');
 	_printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
+	_printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
 	return (0);
 }
