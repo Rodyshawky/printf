@@ -31,6 +31,11 @@ while (*format)
 		format++;
 		if (*format == '\0')
 			break;
+		else if (*format == '%')
+                {
+                        write(1, format, 1);
+                        count++;
+                }
 		else if (*format == 'c')
 		{
 			c = va_arg(arg, int);
