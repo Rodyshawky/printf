@@ -1,7 +1,7 @@
 #include "main.h"
 #include <limits.h>
 #include <stdio.h>
-
+#include <string.h>
 /**
  * _printf - produces output according to a format
  * @format: format string 
@@ -10,38 +10,43 @@
  */
 int _printf(const char *format, ...)
 {
-	const char *p;
-	va_list arguments;
-	flags_t flags = {0, 0, 0};
+	char *str;
+	int len = 0;
+	va_list arg;
+	int count = 0;
+	char c;
 
-	register int count = 0;
-
-	va_start(arguments, format);
-	if (!format || (format[0] == '%' && !format[1]))
+	if (format == NULL)
 		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-	for (p = format; *p; p++)
+	va_start(arg, format);
+	while (*format)
 	{
-		if (*p == '%')
+		if (*format != '%')
 		{
-			p++;
-			if (*p == '%')
-			{
-				count += _putchar('%');
-				continue;
-			}
-			while (get_flag(*p, &flags))
-				p++;
-			/*pfunc=format_print(*p);*/
-			count += (pfunc)
-				? pfunc(arguments, &flags)
-				: _printf("%%%c", *p);
-		} else
-			count += _putchar(*p);
+			write(1, format, 1);
+			count++;
+		}
+		else
+		{
+			format++;
+		if (*format == '\0')
+                       break;
+		if (*format != 'c')
+                {
+			c = va_arg(arg, int);
+			write(1, &c, 1);
+                        count++;
+                }
+		if (*format != 's')
+                {
+			str = va_arg(arg, char*);
+			len = strlen(str);
+                        write(1, str, len);
+			count += len;
+                }
+		format++;
+		}
 	}
-	_putchar(-1);
-	va_end(arguments);
-	return (count);
-
+		va_end(arg);
+		return (count);
 }
