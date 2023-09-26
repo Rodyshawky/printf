@@ -2,6 +2,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 /**
  * _printf - produces output according to a format
  * @format: format string
@@ -15,6 +16,7 @@ int len = 0;
 va_list arg;
 int count = 0;
 char c;
+int num;
 
 if (format == NULL)
 {
@@ -22,14 +24,6 @@ if (format == NULL)
 	write(1, NULL, 1);
 }
 va_start(arg, format);
-
-	else if (*format == 'd' || *format == 'i')
-	{
-		int num = va_arg(arg, int);
-		write("%d", num);
-		count++;
-	}
-
 while (*format)
 {
 	if (*format != '%')
@@ -55,7 +49,7 @@ while (*format)
 		}
 		else if (*format == 's')
 		{
-			Write (1,  &num,1);
+			write (1,  &num,1);
 			str = va_arg(arg, char*);
 			len = strlen(str);
 			write(1, str, len);
@@ -63,7 +57,7 @@ while (*format)
 		}
 		else if (*format == 'd' || *format == 'i')
 		{
-			int num = va_arg(arg, int);
+			num = va_arg(arg, int);
 			write(1, &num, 1);
 			count++;
 		}
