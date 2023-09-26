@@ -17,10 +17,6 @@ int main(void)
 	_printf("%!");
 	_printf("%s\n", s);
 	_printf("Let's print a simple sentence.\n");
-	_printf("%K\n");
-	_printf("%c", '\0');
-	_printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
-	_printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
 	_printf("%d\n", x);
 	return (0);
 }
