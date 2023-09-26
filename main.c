@@ -9,8 +9,9 @@
  */
 int main(void)
 {
-	int c = 'o';
+	char c = 'o';
 	char *s = "Hello";
+	int x = 5;
 
 	_printf("%c\n", c);
 	_printf("%!");
@@ -20,5 +21,6 @@ int main(void)
 	_printf("%c", '\0');
 	_printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
 	_printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
+	_printf("%d\n", x);
 	return (0);
 }
