@@ -8,4 +8,5 @@
 
 int _printf(const char *format, ...);
 char buffer[BUFFER_SIZE];
+int _putchar(char c);
 #endif

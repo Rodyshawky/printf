@@ -19,5 +19,7 @@ int main(void)
 	_printf("Let's print a simple sentence.\n");
 	_printf("%d\n", x);
 	_printf("%s", "This sentence is retrieved from va_args!\n");
+	_printf("%d", 1024);
+	_printf("%d", 0);
 	return (0);
 }

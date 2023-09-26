@@ -57,7 +57,7 @@ while (*format)
 		else if (*format == 'd' || *format == 'i')
 		{
 			num = va_arg(arg, int);
-			write(1, &num, 4);
+			_putchar(num + 48);
 			count++;
 		}
 	}
