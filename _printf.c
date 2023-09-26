@@ -49,7 +49,6 @@ while (*format)
 		}
 		else if (*format == 's')
 		{
-			write (1,  &num,1);
 			str = va_arg(arg, char*);
 			len = strlen(str);
 			write(1, str, len);
