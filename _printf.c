@@ -52,6 +52,12 @@ while (*format)
 			write(1, str, len);
 			count += len;
 		}
+		else if (*format == 'd' || *format == 'i')
+		{
+			int num = va_arg(arg, int);
+			write(1, &num, 1);
+			count++;
+		}
 	}
 		format++;
 }
