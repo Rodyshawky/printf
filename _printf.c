@@ -22,6 +22,14 @@ if (format == NULL)
 	write(1, NULL, 1);
 }
 va_start(arg, format);
+
+	else if (*format == 'd' || *format == 'i')
+	{
+		int num = va_arg(arg, int);
+		write("%d", num);
+		count++;
+	}
+
 while (*format)
 {
 	if (*format != '%')
@@ -47,6 +55,7 @@ while (*format)
 		}
 		else if (*format == 's')
 		{
+			Write (1,  &num,1);
 			str = va_arg(arg, char*);
 			len = strlen(str);
 			write(1, str, len);
